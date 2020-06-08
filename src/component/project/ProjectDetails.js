@@ -4,12 +4,24 @@ import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
 import moment from "moment";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 function ProjectDetails(props) {
   const btnVariant = {
     hidden: {
       opacity: 0,
       x: "100vw",
+    },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: { delay: 0.5 },
+    },
+  };
+  const backVariant = {
+    hidden: {
+      opacity: 0,
+      x: "-100vw",
     },
     visible: {
       opacity: 1,
@@ -29,6 +41,16 @@ function ProjectDetails(props) {
       >
         <div className=" card z-depth-0 project-summary">
           <div className="card-content grey-text text-darken-3">
+            <motion.div
+              variants={backVariant}
+              onClick={props.history.goBack}
+              initial="hidden"
+              animate="visible"
+              style={{ marginTop: -6 }}
+              className="left btn-floating btn-large waves-effect waves-light blue"
+            >
+              <i className="material-icons">reply</i>
+            </motion.div>
             <span className="card-title">
               <h3>{project.title}</h3>
             </span>
